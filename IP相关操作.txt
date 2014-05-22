@@ -1,0 +1,199 @@
+/**
+		 * 检查IP地址是否合法
+		 * 
+		 * @param ipaddress
+		 * @return NULL 不合法
+		 */
+		public static String checkIP(String ipaddress)
+		{
+			Pattern IP_PATTERN = Pattern
+				.compile("(\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b)|((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:\\*?))|((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){2}(?:\\*\\.\\*?))|((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)(?:\\*\\.\\*\\.\\*?))");
+			
+			String result = ipaddress;
+			
+			String[] subips = result.split("\\.");
+			
+			if (subips.length != 4) return null;
+			for (int i = 0; i < subips.length; i++)
+			{
+				if (subips[i] == null || subips[i].equals("")) return null;
+			}
+			
+			if (!IP_PATTERN.matcher(result).matches())
+			{
+				return null;
+			}
+			else return result;
+			
+		}
+		
+		/**
+		 * 检查子网掩码是否有效
+		 * 
+		 * @param ipaddress
+		 * @return
+		 */
+		public static boolean checkMask(String begintipaddress, String endipaddress,
+			String maskaddress)
+		{
+			boolean result = true;
+			Pattern IP_PATTERN = Pattern
+				.compile("((24[08]|25[245]|224|192|128|0)\\.){3}(24[08]|25[245]|224|192|128|0)");
+			
+			String maskAddresstemp = maskaddress;
+			
+			String[] submakss = maskAddresstemp.split("\\.");
+			
+			if (submakss.length != 4) return false;
+			for (int i = 0; i < submakss.length; i++)
+			{
+				if (submakss[i] == null || submakss[i].equals("")) return false;
+			}
+			
+			if (!IP_PATTERN.matcher(maskAddresstemp).matches()) { return false; }
+			String beginipaddresstemp = begintipaddress;
+			String endipaddresstemp = endipaddress;
+			
+			String[] subbeginips = beginipaddresstemp.split("\\.");
+			String[] subendips = endipaddresstemp.split("\\.");
+			
+			if (subbeginips.length != 4) return false;
+			if (subendips.length != 4) return false;
+			int[] intbeginips = new int[subbeginips.length];
+			int[] intendips = new int[subbeginips.length];
+			int[] intmakss = new int[subbeginips.length];
+			for (int i = 0; i < subbeginips.length; i++)
+			{
+				intbeginips[i] = Integer.valueOf(subbeginips[i]).intValue();
+				intendips[i] = Integer.valueOf(subendips[i]).intValue();
+				intmakss[i] = Integer.valueOf(submakss[i]).intValue();
+			}
+			for (int i = 0; i < intmakss.length; i++)
+			{
+				if (i < intmakss.length - 1)
+				{
+					if (intmakss[i] < intmakss[i + 1]) { return false; }
+				}
+				
+				if (intmakss[i] != 255)
+				{
+					boolean flag = true;
+					for (int j = i + 1; j < subbeginips.length - i; i++)
+					{
+						if (intmakss[j] != 0)
+						{
+							flag = false;
+							break;
+						}
+						
+					}
+					if (!flag) return false;
+				}
+			}
+			
+			return result;
+		}
+		
+		/**
+		 * 检查输入的IP地址范围的合法性
+		 * 
+		 * @param ipaddress
+		 * @return
+		 */
+		public static boolean checkIpRange(String begintipaddress, String endipaddress,
+			String maskAddress)
+		{
+			boolean result = true;
+			String beginipaddresstemp = begintipaddress;
+			String endipaddresstemp = endipaddress;
+			String maskAddresstemp = maskAddress;
+			
+			String[] subbeginips = beginipaddresstemp.split("\\.");
+			String[] subendips = endipaddresstemp.split("\\.");
+			String[] submakss = maskAddresstemp.split("\\.");
+			if (subbeginips.length != 4) return false;
+			if (subendips.length != 4) return false;
+			if (submakss.length != 4) return false;
+			int[] tempbeginint = new int[subbeginips.length];
+			int[] tempendint = new int[subendips.length];
+			int[] intbeginips = new int[subbeginips.length];
+			int[] intendips = new int[subendips.length];
+			int[] intmakss = new int[submakss.length];
+			for (int i = 0; i < subbeginips.length; i++)
+			{
+				intbeginips[i] = Integer.valueOf(subbeginips[i]).intValue();
+				intendips[i] = Integer.valueOf(subendips[i]).intValue();
+				intmakss[i] = Integer.valueOf(submakss[i]).intValue();
+			}
+			for (int i = 0; i < subbeginips.length; i++)
+			{
+				tempbeginint[i] = intbeginips[i] & intmakss[i];
+				tempendint[i] = intendips[i] & intmakss[i];
+			}
+			for (int i = 0; i < subbeginips.length; i++)
+			{
+				if (tempbeginint[i] != tempendint[i]) { return false; }
+			}
+			
+			return result;
+			
+		}
+		
+		/**
+		 * 比较IP地址大小，相等返回：0, beginIPaddress大于endIPaddress返回:1，
+		 * beginIPaddress小于endIPaddress返回:-1;
+		 * 
+		 * @param beginIPaddress
+		 * @param endIPaddress
+		 * @return
+		 */
+		public static int compareIP(String beginIPaddress, String endIPaddress)
+		{
+			int compareresult = 0;
+			String[] beginsubips = beginIPaddress.split("\\.");
+			
+			String[] endsubips = endIPaddress.split("\\.");
+			
+			for (int i = 0; i < 4; i++)
+			{
+				Integer argument1 = Integer.valueOf(beginsubips[i]);
+				Integer argument2 = Integer.valueOf(endsubips[i]);
+				int iresult = argument1.compareTo(argument2);// beginsubips[i]<endsubips[i]
+																// 返回值<0
+				if (iresult != 0)
+				{
+					if (iresult > 0)
+					{
+						compareresult = 1;
+					}
+					else
+					{
+						compareresult = -1;
+					}
+					break;
+				}
+			}
+			return compareresult;
+		}
+		
+		/**
+		 * 检查端口号是否合法
+		 * 
+		 * @param port
+		 * @return -1 不合法
+		 */
+		public static int checkPort(String port)
+		{
+			Integer iport = null;
+			try
+			{
+				iport = new Integer(port);
+			}
+			catch (Exception e)
+			{
+				return -1;
+			}
+			
+			if (iport.compareTo(new Integer(0)) < 0 && iport.compareTo(new Integer(65535)) > 0) { return -1; }
+			return iport.intValue();
+		}

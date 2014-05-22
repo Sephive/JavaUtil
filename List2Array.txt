@@ -1,0 +1,6 @@
+ArrayList inputList = new ArrayList();
+MyArray[] myarr = null;
+if(inputList != null){
+myarr = new MyArray[inputList.size()];
+myarr = (MyArray[]) inputList.toArray(myarr);
+}
