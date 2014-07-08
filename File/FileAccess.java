@@ -1,7 +1,7 @@
 /**
  * @author zhangyunpeng
- * 控制读写本地文件的操作 
- * 该类控制读写本地文件，每项属性需要有一个唯一个KEY定义在ConstantDefine里面，其他相关内容用#隔开，根据KEY来插入和读取
+ * 锟斤拷锟狡讹拷写锟斤拷锟斤拷锟侥硷拷锟侥诧拷锟斤拷 
+ * 锟斤拷锟斤拷锟斤拷锟狡讹拷写锟斤拷锟斤拷锟侥硷拷锟斤拷每锟斤拷锟斤拷锟斤拷锟斤拷要锟斤拷一锟斤拷唯一锟斤拷KEY锟斤拷锟斤拷锟斤拷ConstantDefine锟斤拷锟芥，锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷#锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷KEY锟斤拷锟斤拷锟斤拷锟酵讹拷取
  */
 package cn.com.postel.da.client.common;
 
@@ -18,9 +18,9 @@ import java.util.Hashtable;
 import cn.com.postel.da.client.business.ConstantDefine;
 
 @SuppressWarnings("unchecked")
-public class FileAccess
-	{
-		private String fileName,fileHead;
+public class FileAccess{
+	
+	    private String fileName,fileHead;
 		
 	    private Hashtable hash = new Hashtable();
 	    
@@ -36,9 +36,9 @@ public class FileAccess
 	    }
 	    
 	    /**
-	     * 设置文件属性
-	     * @param key 属性关键字
-	     * @param fileprop 属性
+	     * 锟斤拷锟斤拷锟侥硷拷锟斤拷锟斤拷
+	     * @param key 锟斤拷锟皆关硷拷锟斤拷
+	     * @param fileprop 锟斤拷锟斤拷
 	     */
 	    public void setProp(String key,FileProp fileprop)
 	    {
@@ -47,7 +47,7 @@ public class FileAccess
 	    }
 	    
 	    /**
-	     * @return 文件是否存在
+	     * @return 锟侥硷拷锟角凤拷锟斤拷锟斤拷
 	     */
 	    public boolean fileExist()
 	    {
@@ -59,8 +59,8 @@ public class FileAccess
 	    	return true;
 	    }
 	    /*
-	    将文件内容返回到一个字符串里去
-	    如果有错误返回 null
+	    锟斤拷锟侥硷拷锟斤拷锟捷凤拷锟截碉拷一锟斤拷锟街凤拷锟斤拷锟斤拷去
+	    锟斤拷锟斤拷锟叫达拷锟襟返伙拷 null
 	    */
 	    private String getAllContent()
 	    {
@@ -100,9 +100,9 @@ public class FileAccess
 	   }
 
 	    /**
-	     *  对文件写入新的内容writemod的方式有2种
-	    	0：如果文件存在，新的内容追加到文件。否则创建一个新文件 注意！！只能一行一行的写 否则返回错误
-	    	1: 如果文件存在，覆盖旧文件的内容。否则创建一个新文件
+	     *  锟斤拷锟侥硷拷写锟斤拷锟铰碉拷锟斤拷锟斤拷writemod锟侥凤拷式锟斤拷2锟斤拷
+	    	0锟斤拷锟斤拷锟斤拷锟侥硷拷锟斤拷锟节ｏ拷锟铰碉拷锟斤拷锟斤拷追锟接碉拷锟侥硷拷锟斤拷锟斤拷锟津创斤拷一锟斤拷锟斤拷锟侥硷拷 注锟解！锟斤拷只锟斤拷一锟斤拷一锟叫碉拷写 锟斤拷锟津返回达拷锟斤拷
+	    	1: 锟斤拷锟斤拷锟侥硷拷锟斤拷锟节ｏ拷锟斤拷锟角撅拷锟侥硷拷锟斤拷锟斤拷锟捷★拷锟斤拷锟津创斤拷一锟斤拷锟斤拷锟侥硷拷
 	     * @param strInputContent
 	     * @param iType
 	     * @throws IOException
@@ -111,7 +111,7 @@ public class FileAccess
 	    {
 	    	 if(strInputContent.split(System.getProperty("line.separator")).length != 1)
 	    	 {
-	    		 System.err.println("写文件时只能一行一行插入！");
+	    		 System.err.println("写锟侥硷拷时只锟斤拷一锟斤拷一锟叫诧拷锟诫！");
 	    		 return;
 	    	 }  
 	    	 
@@ -120,13 +120,13 @@ public class FileAccess
 	    	 
 	    	 if(strInputContent == null || key == null)
 	    	 {
-	    		 System.err.println("输入数据有错误！");
+	    		 System.err.println("锟斤拷锟斤拷锟斤拷锟斤拷锟叫达拷锟斤拷锟斤拷");
 	    		 return;
 	    	 }
 	    	 FileProp fileProp = (FileProp)hash.get(key);
 	    	 if(fileProp == null)
 	    	 {
-	    		 System.err.println("没有设置信息属性！");
+	    		 System.err.println("没锟斤拷锟斤拷锟斤拷锟斤拷息锟斤拷锟皆ｏ拷");
 	    		 return;	 
 	    	 }
 	    	 boolean fileExist = fileExist();
@@ -151,7 +151,7 @@ public class FileAccess
 	         int iSameKeyCount = 0;
 	         switch (iType)
 	         {
-	           case ConstantDefine.FileWriteType.ADD:    //追加新的内容
+	           case ConstantDefine.FileWriteType.ADD:    //追锟斤拷锟铰碉拷锟斤拷锟斤拷
 	        	   
 	        	   String newContent = "";
 	        	   int iStartLine = 0;
@@ -180,7 +180,7 @@ public class FileAccess
 	        			   iStartLine = i;
 	        			   iSameKeyCount++;
 	        		   }
-	        		   //如果超出最大行数 则覆盖
+	        		   //锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 锟津覆革拷
 	        		   if(fileProp.getMaxLine() != 0)
 		        	   {
 			        	   if(iSameKeyCount == fileProp.getMaxLine()+1)
@@ -191,17 +191,17 @@ public class FileAccess
 			        	   }
 		        	   }
 	        		   
-	        		   //如果没有超出
+	        		   //锟斤拷锟斤拷没锟叫筹拷锟斤拷
 	        		   String[] lastlineExist = exist[lastLineIndex].split("#");
 	        		   if(lastlineExist[0].equals(key))
         			   {
-	        			   //如果是结尾
+	        			   //锟斤拷锟斤拷锟角斤拷尾
 	        			   if(i == exist.length-1)
 	        			   {
 	        				   iStartLine = i; 
 	        				   break;
 	        			   }   
-	        			   //在中间
+	        			   //锟斤拷锟叫硷拷
 	        			   if(!lastlineExist[0].equals(curlineExist[0]))
 	        			   {
 	        				   iStartLine = lastLineIndex;    
@@ -216,7 +216,7 @@ public class FileAccess
 	        	   {
 	        		    if(iSameKeyCount == 0)
 	        		    {
-	        		    	//如果还没有该项属性 在末尾添加该项属性
+	        		    	//锟斤拷锟斤拷锟斤拷没锟叫革拷锟斤拷锟斤拷锟斤拷 锟斤拷末尾锟斤拷锟接革拷锟斤拷锟斤拷锟斤拷
 	        		    	String add = System.getProperty("line.separator")+System.getProperty("line.separator") + fileProp.getName() + "#" + fileProp.getDescrp();
 	        		    	add += System.getProperty("line.separator") + strInputContent;
 	        		    	exist[exist.length-1] = exist[exist.length-1] + add;
@@ -240,7 +240,7 @@ public class FileAccess
 	        	   
 	               strContent=newContent;
 	               break;
-	           case ConstantDefine.FileWriteType.OVERLY:    //新内容直接覆盖旧内容 说明该属性只有一行！
+	           case ConstantDefine.FileWriteType.OVERLY:    //锟斤拷锟斤拷锟斤拷直锟接革拷锟角撅拷锟斤拷锟斤拷 说锟斤拷锟斤拷锟斤拷锟斤拷只锟斤拷一锟叫ｏ拷
 	           default:
 	        	   int overlyLine = 0;
 	        	   for(int i=0;i<exist.length;i++)
@@ -266,7 +266,7 @@ public class FileAccess
 	               
 	        	   if(iSameKeyCount == 0)
 	        	   {
-	        		   //没有这项属性
+	        		   //没锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
 	        		   String add = System.getProperty("line.separator")+System.getProperty("line.separator") + fileProp.getName() + "#" + fileProp.getDescrp();
        		    	   add += System.getProperty("line.separator") + strInputContent;
        		    	   exist[exist.length-1] = exist[exist.length-1] + add;
@@ -309,9 +309,9 @@ public class FileAccess
 		}
 
 		/**
-		 * 取得本地内容
+		 * 取锟矫憋拷锟斤拷锟斤拷锟斤拷
 		 * @param key
-		 * @return 内容数组 length为内容条数 没有返回String[0]
+		 * @return 锟斤拷锟斤拷锟斤拷锟斤拷 length为锟斤拷锟斤拷锟斤拷锟斤拷 没锟叫凤拷锟斤拷String[0]
 		 */
 		public String[] getFileDataFormKey(String key)
 		{
@@ -358,7 +358,7 @@ public class FileAccess
 			return result;
 		}
 		/**
-		 * 完全清除某项内容
+		 * 锟斤拷全锟斤拷锟斤拷某锟斤拷锟斤拷锟斤拷
 		 * @param key
 		 */
 		public void clearOneContent(String key) throws IOException
