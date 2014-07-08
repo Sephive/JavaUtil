@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * 验证工具
- * @author suzhengkun
+ * 
+ * @author syw
  *
  */
 public abstract class Assert
